@@ -30,6 +30,10 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import Comments from "../Posts/Comments";
+import { API_URL } from "../Authentication/AuthService";
+
+// API base URL
+
 
 const TripleTCard = ({ post, profileUserId }) => {
   const navigate = useNavigate();
@@ -67,7 +71,7 @@ const TripleTCard = ({ post, profileUserId }) => {
         
         // Use the normal user endpoint with the stored user ID instead of /me
         const response = await axios.get(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${userId}`,
+          `${API_URL}/api/v1/users/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -107,7 +111,7 @@ const TripleTCard = ({ post, profileUserId }) => {
       }
       
       const response = await axios.delete(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/shares/${post.shareId}`,
+        `${API_URL}/api/v1/shares/${post.shareId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -158,7 +162,7 @@ const TripleTCard = ({ post, profileUserId }) => {
       }
       
       const response = await axios.delete(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${postId}`,
+        `${API_URL}/api/v1/posts/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -189,7 +193,7 @@ const TripleTCard = ({ post, profileUserId }) => {
         try {
           const accessToken = localStorage.getItem("access_token");
           const response = await axios.get(
-            `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${post.userId}`,
+            `${API_URL}/api/v1/users/${post.userId}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -250,7 +254,7 @@ const TripleTCard = ({ post, profileUserId }) => {
       if (newLikedState) {
         // Like post using the new API endpoint
         const response = await axios.post(
-          'https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes',
+          `${API_URL}/api/v1/likes`,
           {
             postId: post.postId || post.id
           },
@@ -279,7 +283,7 @@ const TripleTCard = ({ post, profileUserId }) => {
         }
         
         const response = await axios.delete(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes/${likeId}`,
+          `${API_URL}/api/v1/likes/${likeId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`
@@ -354,7 +358,7 @@ const TripleTCard = ({ post, profileUserId }) => {
       }
       
       const response = await axios.post(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/shares`,
+        `${API_URL}/api/v1/shares`,
         {
           content: shareContent,
           postId: post.postId || post.id
@@ -399,7 +403,7 @@ const TripleTCard = ({ post, profileUserId }) => {
       
       // Fetch likes using the API
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes?page=0&size=20`,
+        `${API_URL}/api/v1/likes?page=0&size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`
@@ -443,7 +447,7 @@ const TripleTCard = ({ post, profileUserId }) => {
         
         try {
           const response = await axios.get(
-            `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${userId}`,
+            `${API_URL}/api/v1/users/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -497,7 +501,7 @@ const TripleTCard = ({ post, profileUserId }) => {
     if (user && user.avatarUrl) {
       return user.avatarUrl.startsWith("http")
         ? user.avatarUrl
-        : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${user.avatarUrl}`;
+        : `${API_URL}/${user.avatarUrl}`;
     }
     return "https://static.oneway.vn/post_content/2022/07/21/file-1658342005830-resized.jpg";
   };
@@ -543,7 +547,7 @@ const TripleTCard = ({ post, profileUserId }) => {
   const getMediaArray = () => {
     if (post?.mediaUrl) return [post.mediaUrl];
     if (post?.media && Array.isArray(post.media)) {
-      return post.media.map(m => m.url ? (m.url.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url}`) : m).filter(Boolean);
+      return post.media.map(m => m.url ? (m.url.startsWith('http') ? m.url : `${API_URL}/${m.url}`) : m).filter(Boolean);
     }
     if (post?.mediaUrls && Array.isArray(post.mediaUrls)) return post.mediaUrls;
     if (post?.images && Array.isArray(post.images)) return post.images;

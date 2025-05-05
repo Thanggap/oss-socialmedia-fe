@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "./AuthService";
 
 const RegisterInfo = () => {
   const [searchParams] = useSearchParams();
@@ -35,7 +36,7 @@ const RegisterInfo = () => {
   const handleRegister = async () => {
     try {
       const response = await axios.post(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/auth/register",
+        `${API_URL}/api/v1/auth/register`,
         {
           lastName: formData.lastName,
           firstName: formData.firstName,

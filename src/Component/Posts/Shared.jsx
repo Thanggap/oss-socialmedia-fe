@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Box, CircularProgress, Typography } from "@mui/material";
 import axios from "axios";
 import TripleTCard from "../HomeSection/TripleTCard";
+import { API_URL } from "../Authentication/AuthService";
 
 const Shared = ({ userId }) => {
   const [userShares, setUserShares] = useState([]);
@@ -17,7 +18,7 @@ const Shared = ({ userId }) => {
       try {
         const accessToken = localStorage.getItem("access_token");
         const response = await axios.get(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${userId}`,
+          `${API_URL}/api/v1/users/${userId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -44,7 +45,7 @@ const Shared = ({ userId }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/shares?page=${page}&size=5`,
+        `${API_URL}/api/v1/shares?page=${page}&size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -75,7 +76,7 @@ const Shared = ({ userId }) => {
             try {
               // Thử sử dụng API post/feed để lấy thông tin chi tiết bài viết
               const postResponse = await axios.get(
-                `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/feed/${postId}`,
+                `${API_URL}/api/v1/posts/feed/${postId}`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -92,7 +93,7 @@ const Shared = ({ userId }) => {
                 if (originalUserId && !userDetails[originalUserId]) {
                   try {
                     const userResponse = await axios.get(
-                      `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${originalUserId}`,
+                      `${API_URL}/api/v1/users/${originalUserId}`,
                       {
                         headers: {
                           Authorization: `Bearer ${accessToken}`
@@ -116,7 +117,7 @@ const Shared = ({ userId }) => {
               try {
                 // Thử sử dụng endpoint API thay thế nếu feed API không hoạt động
                 const altPostResponse = await axios.get(
-                  `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?postId=${postId}`,
+                  `${API_URL}/api/v1/posts?postId=${postId}`,
                   {
                     headers: {
                       Authorization: `Bearer ${accessToken}`
@@ -139,7 +140,7 @@ const Shared = ({ userId }) => {
                     if (originalUserId && !userDetails[originalUserId]) {
                       try {
                         const userResponse = await axios.get(
-                          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${originalUserId}`,
+                          `${API_URL}/api/v1/users/${originalUserId}`,
                           {
                             headers: {
                               Authorization: `Bearer ${accessToken}`
@@ -176,7 +177,7 @@ const Shared = ({ userId }) => {
                 // Lấy media từ các nguồn khác nhau có thể có
                 if (postDetail.media && Array.isArray(postDetail.media)) {
                   mediaUrls = postDetail.media.map(m => m.url ? 
-                      (m.url.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url}`) : null)
+                      (m.url.startsWith('http') ? m.url : `${API_URL}/${m.url}`) : null)
                       .filter(Boolean);
                 } else if (postDetail.mediaUrls && Array.isArray(postDetail.mediaUrls)) {
                   mediaUrls = postDetail.mediaUrls;
@@ -208,7 +209,7 @@ const Shared = ({ userId }) => {
               
               // Đảm bảo rằng URL avatar bắt đầu bằng http
               if (processedOriginalUserInfo.avatarUrl && !processedOriginalUserInfo.avatarUrl.startsWith('http')) {
-                processedOriginalUserInfo.avatarUrl = `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${processedOriginalUserInfo.avatarUrl}`;
+                processedOriginalUserInfo.avatarUrl = `${API_URL}/${processedOriginalUserInfo.avatarUrl}`;
               }
               
               console.log("Original user info for post", share.postId, ":", processedOriginalUserInfo);

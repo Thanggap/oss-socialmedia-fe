@@ -18,6 +18,7 @@ import LockIcon from '@mui/icons-material/Lock';
 import axios from "axios";
 import * as Yup from "yup";
 import "./ProfileModal.css";
+import { API_URL } from "../Authentication/AuthService";
 
 const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
   const [uploading, setUploading] = React.useState(false);
@@ -123,7 +124,7 @@ const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
 
       // Call the API to update user profile
       const response = await axios.put(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users",
+        `${API_URL}/api/v1/users`,
         payload,
         {
           headers: {
@@ -191,7 +192,7 @@ const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
 
       // Call the API to change password
       const response = await axios.patch(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/change-pwd",
+        `${API_URL}/api/v1/users/change-pwd`,
         payload,
         {
           headers: {
@@ -220,7 +221,7 @@ const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
           
           // Call login API with new password to get fresh token
           const loginResponse = await axios.post(
-            "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/auth/login",
+            `${API_URL}/api/v1/auth/login`,
             {
               username: username,
               password: values.password

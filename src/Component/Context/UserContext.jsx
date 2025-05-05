@@ -1,9 +1,10 @@
 import { createContext, useState, useEffect, useCallback } from "react";
 import axios from "axios";
+import { API_URL } from "../Authentication/AuthService";
 
 // Tạo instance Axios với cấu hình cơ bản
 const api = axios.create({
-  baseURL: "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1",
+  baseURL: `${API_URL}"/api/v1`,
   headers: {
     "Content-Type": "application/json",
   },

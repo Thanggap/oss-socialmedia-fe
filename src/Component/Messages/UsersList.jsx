@@ -36,7 +36,7 @@ const UsersList = ({ visible, onClose, onSelectUser }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?size=20",
+        `${API_URL}/api/v1/users?size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

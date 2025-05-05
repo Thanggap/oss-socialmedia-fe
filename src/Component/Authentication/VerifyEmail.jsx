@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API_URL } from "./AuthService";
 
 const VerifyEmail = () => {
   const [email, setEmail] = useState("");
@@ -8,7 +9,7 @@ const VerifyEmail = () => {
 
   const handleSendVerifyEmail = async () => {
     try {
-      await axios.post("https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/email/send", {
+      await axios.post(`${API_URL}/api/v1/email/send`, {
         recipientEmails: [email], // Gửi email
       });
 

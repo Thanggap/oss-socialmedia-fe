@@ -28,6 +28,9 @@ import RepeatIcon from "@mui/icons-material/Repeat";
 import IosShareIcon from "@mui/icons-material/IosShare";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 
+// API base URL
+const API_URL = "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net";
+
 const TripleTDetails = () => {
   const { postId } = useParams();
   const location = useLocation();
@@ -99,7 +102,7 @@ const TripleTDetails = () => {
       }
 
       const response = await axios.delete(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${postId}`,
+        `${API_URL}/api/v1/posts/${postId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -129,7 +132,7 @@ const TripleTDetails = () => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.delete(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments/${commentId}`,
+        `${API_URL}/api/v1/comments/${commentId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -178,7 +181,7 @@ const TripleTDetails = () => {
 
         // Thay đổi cách gọi API để lấy chính xác bài viết theo ID
         const response = await axios
-          .get(`https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${postId}`, {
+          .get(`${API_URL}/api/v1/posts/${postId}`, {
             headers: {
               Authorization: `Bearer ${accessToken}`,
             },
@@ -187,7 +190,7 @@ const TripleTDetails = () => {
             // Nếu API trực tiếp không tồn tại, sử dụng phương pháp tìm kiếm
             console.log("Falling back to search API for post ID:", postId);
             return await axios.get(
-              `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?keyword=${postId}&size=20`,
+              `${API_URL}/api/v1/posts?keyword=${postId}&size=20`,
               {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
@@ -260,7 +263,7 @@ const TripleTDetails = () => {
       const accessToken = localStorage.getItem("access_token");
 
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${userId}`,
+        `${API_URL}/api/v1/users/${userId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -290,7 +293,7 @@ const TripleTDetails = () => {
             .map((m) =>
               m.url && m.url.startsWith("http")
                 ? m.url
-                : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url || ""}`
+                : `${API_URL}/${m.url || ""}`
             )
             .filter((url) => url)
         : postData.mediaUrls || [],
@@ -308,7 +311,7 @@ const TripleTDetails = () => {
       
       // Use the general comments endpoint with a larger size to ensure we get all possible comments
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments?page=${page}&size=20`,
+        `${API_URL}/api/v1/comments?page=${page}&size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -395,7 +398,7 @@ const TripleTDetails = () => {
 
         try {
           const response = await axios.get(
-            `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${userId}`,
+            `${API_URL}/api/v1/users/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`,
@@ -447,7 +450,7 @@ const TripleTDetails = () => {
       if (newLikedState) {
         // Like post using the new API endpoint
         const response = await axios.post(
-          'https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes',
+          `${API_URL}/api/v1/likes`,
           {
             postId: postId
           },
@@ -476,7 +479,7 @@ const TripleTDetails = () => {
         }
 
         const response = await axios.delete(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes/${likeId}`,
+          `${API_URL}/api/v1/likes/${likeId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`
@@ -515,7 +518,7 @@ const TripleTDetails = () => {
       
       // Fetch likes using the API
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes?page=0&size=20`,
+        `${API_URL}/api/v1/likes?page=0&size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`
@@ -559,7 +562,7 @@ const TripleTDetails = () => {
         
         try {
           const response = await axios.get(
-            `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${userId}`,
+            `${API_URL}/api/v1/users/${userId}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -604,7 +607,7 @@ const TripleTDetails = () => {
     if (user && user.avatarUrl) {
       return user.avatarUrl.startsWith("http")
         ? user.avatarUrl
-        : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${user.avatarUrl}`;
+        : `${API_URL}/${user.avatarUrl}`;
     }
     return "https://static.oneway.vn/post_content/2022/07/21/file-1658342005830-resized.jpg";
   };
@@ -626,7 +629,7 @@ const TripleTDetails = () => {
       const accessToken = localStorage.getItem("access_token");
 
       const response = await axios.post(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments`,
+        `${API_URL}/api/v1/comments`,
         {
           postId: postId,
           content: comment,
@@ -664,7 +667,7 @@ const TripleTDetails = () => {
       }
 
       const response = await axios.post(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/shares`,
+        `${API_URL}/api/v1/shares`,
         {
           content: "", // Empty content for simple share
           postId: postId,
@@ -761,7 +764,7 @@ const TripleTDetails = () => {
       // Kiểm tra và xử lý đường dẫn avatar
       return user.avatarUrl.startsWith("http")
         ? user.avatarUrl
-        : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${user.avatarUrl}`;
+        : `${API_URL}/${user.avatarUrl}`;
     }
     return "https://static.oneway.vn/post_content/2022/07/21/file-1658342005830-resized.jpg";
   };
@@ -790,14 +793,14 @@ const TripleTDetails = () => {
       // Kiểm tra và xử lý đường dẫn avatar
       return postUserData.avatarUrl.startsWith("http")
         ? postUserData.avatarUrl
-        : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${postUserData.avatarUrl}`;
+        : `${API_URL}/${postUserData.avatarUrl}`;
     }
 
     // Nếu không có postUserData, thử lấy từ post.user
     if (post?.user?.avatarUrl) {
       return post.user.avatarUrl.startsWith("http")
         ? post.user.avatarUrl
-        : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${post.user.avatarUrl}`;
+        : `${API_URL}/${post.user.avatarUrl}`;
     }
 
     return "https://static.oneway.vn/post_content/2022/07/21/file-1658342005830-resized.jpg";

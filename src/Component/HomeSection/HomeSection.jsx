@@ -8,6 +8,7 @@ import FmdGoodIcon from "@mui/icons-material/FmdGood";
 import TagFacesIcon from "@mui/icons-material/TagFaces";
 import TripleTCard from "./TripleTCard";
 import axios from "axios";
+import { API_URL } from "../Authentication/AuthService";
 
 const validationSchema = Yup.object({
   content: Yup.string().required("TripleT text is Required"),
@@ -57,7 +58,7 @@ const HomeSection = () => {
         
         // Fetch additional user details
         const response = await axios.get(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${storedUserId}`,
+          `${API_URL}/api/v1/users/${storedUserId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -136,7 +137,7 @@ const HomeSection = () => {
 
       // Fetch bài viết từ trang chủ (bao gồm cả bài của mình và người mình follow)
       const homepageResponse = await axios.get(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/homepage",
+        `${API_URL}api/v1/homepage`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -146,7 +147,7 @@ const HomeSection = () => {
 
       // Fetch tất cả bài viết (không phân biệt follow hay không)
       const allPostsResponse = await axios.get(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?page=0&size=50",
+        `${API_URL}/api/v1/posts?page=0&size=50`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -239,7 +240,7 @@ const HomeSection = () => {
         formData.append("media", selectedImage);
       }
       const response = await axios.post(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts",
+        `${API_URL}/api/v1/posts`,
         formData,
         {
           headers: {

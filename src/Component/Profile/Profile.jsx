@@ -11,6 +11,7 @@ import FollowModal from "./FollowModal";
 import { UserContext } from "../Context/UserContext";
 import TripleTCard from "../HomeSection/TripleTCard";
 import Shared from "../Posts/Shared";
+import { API_URL } from "../Authentication/AuthService";
 
 const Profile = ({ userData: propUserData, onBack }) => {
   const { id } = useParams();
@@ -129,7 +130,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       }
 
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${uid}`,
+        `${API_URL}/api/v1/users/${uid}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -178,7 +179,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       const accessToken = localStorage.getItem("access_token");
       console.log("Fetching posts for user ID:", userId);
       
-      const endpoint = `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?creatorId=${userId}&page=${page-1}&size=10`;
+      const endpoint = `${API_URL}/api/v1/posts?creatorId=${userId}&page=${page-1}&size=10`;
 
       const response = await axios.get(endpoint, {
         headers: {
@@ -222,7 +223,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/shares?page=0&size=5`,
+        `${API_URL}/api/v1/shares?page=0&size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -241,7 +242,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
           for (const share of userShareItems) {
             try {
               const postResponse = await axios.get(
-                `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${share.postId}`,
+                `${API_URL}/api/v1/posts/${share.postId}`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -289,7 +290,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       if (!accessToken) return;
 
       const response = await axios.get(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/follows?page=0&size=50",
+        `${API_URL}/api/v1/follows?page=0&size=50`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -367,7 +368,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       let endpoint;
       
       if (tabValue === 0) {
-        endpoint = `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?creatorId=${userId}&page=${nextPage-1}&size=10`;
+        endpoint = `${API_URL}/api/v1/posts?creatorId=${userId}&page=${nextPage-1}&size=10`;
         
         const response = await axios.get(endpoint, {
           headers: {
@@ -670,7 +671,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
         commentsCount: post.commentCount || post.commentsCount || 0,
         repostsCount: post.shareCount || post.repostsCount || 0,
         mediaUrls: post.media 
-          ? post.media.map(m => m.url.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url}`) 
+          ? post.media.map(m => m.url.startsWith('http') ? m.url : `${API_URL}/${m.url}`) 
           : post.mediaUrls || []
       };
     }
@@ -690,7 +691,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
         avatarUrl: userData?.avatarUrl || null
       },
       mediaUrls: post.media 
-        ? post.media.map(m => m.url.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url}`) 
+        ? post.media.map(m => m.url.startsWith('http') ? m.url : `${API_URL}/${m.url}`) 
         : post.mediaUrls || []
     };
   };
@@ -711,7 +712,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       // Use PATCH method with JSON body as shown in the swagger documentation
       const response = await axios({
         method: 'patch',
-        url: 'https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/bio',
+        url: `${API_URL}/api/v1/users/bio`,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`

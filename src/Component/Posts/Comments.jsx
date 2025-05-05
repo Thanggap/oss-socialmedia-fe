@@ -14,6 +14,7 @@ import {
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "../Authentication/AuthService";
 
 const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
   const navigate = useNavigate();
@@ -49,7 +50,7 @@ const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.delete(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments/${commentId}`,
+        `${API_URL}/api/v1/comments/${commentId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -84,7 +85,7 @@ const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments?keyword=${postId}&size=20`,
+        `${API_URL}/api/v1/comments?keyword=${postId}&size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -116,7 +117,7 @@ const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.post(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments`,
+        `${API_URL}/api/v1/comments`,
         {
           postId: postId,
           content: newComment,

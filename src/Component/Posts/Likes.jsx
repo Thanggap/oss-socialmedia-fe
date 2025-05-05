@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Box, CircularProgress, Typography, Button } from "@mui/material";
 import axios from "axios";
 import TripleTCard from "../HomeSection/TripleTCard";
+import { API_URL } from "../Authentication/AuthService";
 
 const Likes = ({ userId }) => {
   const [userLikes, setUserLikes] = useState([]);
@@ -41,7 +42,7 @@ const Likes = ({ userId }) => {
       }
 
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes?page=${page}&size=10`,
+        `${API_URL}/api/v1/likes?page=${page}&size=10`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -119,7 +120,7 @@ const Likes = ({ userId }) => {
         
         try {
           const postResponse = await axios.get(
-            `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${like.postId}`,
+            `${API_URL}/api/v1/posts/${like.postId}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -144,7 +145,7 @@ const Likes = ({ userId }) => {
             if (postData.userId && !newUsersCache[postData.userId]) {
               try {
                 const userResponse = await axios.get(
-                  `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${postData.userId}`,
+                  `${API_URL}/api/v1/users/${postData.userId}`,
                   {
                     headers: {
                       Authorization: `Bearer ${accessToken}`
@@ -223,7 +224,7 @@ const Likes = ({ userId }) => {
       commentsCount: post.commentCount || post.commentsCount || 0,
       repostsCount: post.shareCount || post.repostsCount || 0,
       mediaUrls: post.media 
-        ? post.media.map(m => m.url?.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url || ''}`)
+        ? post.media.map(m => m.url?.startsWith('http') ? m.url : `${API_URL}/${m.url || ''}`)
         : post.mediaUrls || []
     };
   };

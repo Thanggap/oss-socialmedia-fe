@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const API_URL = "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/auth";
+export const API_URL = "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net";
 
 // Tạo instance Axios có cấu hình mặc định
 const api = axios.create({

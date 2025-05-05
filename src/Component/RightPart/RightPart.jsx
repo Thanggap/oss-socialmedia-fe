@@ -5,6 +5,7 @@ import { Box, Typography, Avatar, CircularProgress } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import Messages from "../Messages/Messages";
+import { API_URL } from "../Authentication/AuthService";
 
 const RightPart = ({ onUserSelect }) => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -43,7 +44,7 @@ const RightPart = ({ onUserSelect }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?keyword=${searchQuery}&page=1&size=5`,
+        `${API_URL}/api/v1/users?keyword=${searchQuery}&page=1&size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

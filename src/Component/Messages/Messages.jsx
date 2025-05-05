@@ -13,6 +13,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import CloseIcon from "@mui/icons-material/Close";
 import SearchIcon from "@mui/icons-material/Search";
 import axios from "axios";
+import { API_URL } from "../Authentication/AuthService";
 
 const Messages = ({ onClose }) => {
   const [users, setUsers] = useState([]);
@@ -99,7 +100,7 @@ const Messages = ({ onClose }) => {
     setLoadingUsers(true);
     try {
       const response = await axios.get(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?size=20",
+        `${API_URL}/api/v1/users?size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -129,7 +130,7 @@ const Messages = ({ onClose }) => {
       const [sentResponse, receivedResponse] = await Promise.all([
         // Tin nhắn gửi đi (từ người dùng hiện tại đến người nhận)
         axios.get(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/history?senderId=${currentUserId}&receiverId=${receiverId}`,
+          `${API_URL}/api/chat/history?senderId=${currentUserId}&receiverId=${receiverId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -138,7 +139,7 @@ const Messages = ({ onClose }) => {
         ),
         // Tin nhắn nhận được (từ người nhận gửi đến người dùng hiện tại)
         axios.get(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/history?senderId=${receiverId}&receiverId=${currentUserId}`,
+          `${API_URL}/api/chat/history?senderId=${receiverId}&receiverId=${currentUserId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -200,7 +201,7 @@ const Messages = ({ onClose }) => {
       // Nếu có lỗi, thử sử dụng API tổng hợp
       try {
         const fallbackResponse = await axios.get(
-          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/history`,
+          `${API_URL}/api/chat/history`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -257,7 +258,7 @@ const Messages = ({ onClose }) => {
     
     try {
       const response = await axios.post(
-        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/send?senderId=${currentUserId}&receiverId=${selectedUser.id}&content=${encodeURIComponent(newMessage)}`,
+        `${API_URL}/api/chat/send?senderId=${currentUserId}&receiverId=${selectedUser.id}&content=${encodeURIComponent(newMessage)}`,
         {},
         {
           headers: {

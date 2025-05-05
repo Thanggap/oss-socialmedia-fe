@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { API_URL } from "./AuthService";
 
 const Login = () => {
   const [formData, setFormData] = useState({ username: "", password: "" });
@@ -24,7 +25,7 @@ const Login = () => {
   const handleLogin = async () => {
     try {
       const response = await axios.post(
-        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/auth/login",
+        `${API_URL}/api/v1/auth/login`,
         formData
       );
 
