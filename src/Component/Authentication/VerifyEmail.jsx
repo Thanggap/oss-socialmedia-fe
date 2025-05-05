@@ -8,7 +8,7 @@ const VerifyEmail = () => {
 
   const handleSendVerifyEmail = async () => {
     try {
-      await axios.post("http://localhost:8080/api/v1/email/send", {
+      await axios.post("https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/email/send", {
         recipientEmails: [email], // Gửi email
       });
 

@@ -27,7 +27,7 @@
 //       }
 
 //       const response = await axios.get(
-//         `http://localhost:8080/api/v1/posts?page=${page}&size=${size}`,
+//         `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?page=${page}&size=${size}`,
 //         {
 //           headers: {
 //             Authorization: `Bearer ${accessToken}`,

@@ -57,7 +57,7 @@ const HomeSection = () => {
         
         // Fetch additional user details
         const response = await axios.get(
-          `http://localhost:8080/api/v1/users/${storedUserId}`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${storedUserId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -136,7 +136,7 @@ const HomeSection = () => {
 
       // Fetch bài viết từ trang chủ (bao gồm cả bài của mình và người mình follow)
       const homepageResponse = await axios.get(
-        "http://localhost:8080/api/v1/homepage",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/homepage",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -146,7 +146,7 @@ const HomeSection = () => {
 
       // Fetch tất cả bài viết (không phân biệt follow hay không)
       const allPostsResponse = await axios.get(
-        "http://localhost:8080/api/v1/posts?page=0&size=50",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?page=0&size=50",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -239,7 +239,7 @@ const HomeSection = () => {
         formData.append("media", selectedImage);
       }
       const response = await axios.post(
-        "http://localhost:8080/api/v1/posts",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts",
         formData,
         {
           headers: {

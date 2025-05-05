@@ -43,7 +43,7 @@ const RightPart = ({ onUserSelect }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `http://localhost:8080/api/v1/users?keyword=${searchQuery}&page=1&size=5`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?keyword=${searchQuery}&page=1&size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

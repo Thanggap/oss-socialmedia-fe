@@ -35,7 +35,7 @@ const RegisterInfo = () => {
   const handleRegister = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/auth/register",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/auth/register",
         {
           lastName: formData.lastName,
           firstName: formData.firstName,

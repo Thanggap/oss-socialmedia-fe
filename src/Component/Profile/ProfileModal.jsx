@@ -123,7 +123,7 @@ const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
 
       // Call the API to update user profile
       const response = await axios.put(
-        "http://localhost:8080/api/v1/users",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users",
         payload,
         {
           headers: {
@@ -191,7 +191,7 @@ const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
 
       // Call the API to change password
       const response = await axios.patch(
-        "http://localhost:8080/api/v1/users/change-pwd",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/change-pwd",
         payload,
         {
           headers: {
@@ -220,7 +220,7 @@ const ProfileModal = ({ open, handleClose, userData, onProfileUpdate }) => {
           
           // Call login API with new password to get fresh token
           const loginResponse = await axios.post(
-            "http://localhost:8080/api/v1/auth/login",
+            "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/auth/login",
             {
               username: username,
               password: values.password

@@ -129,7 +129,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       }
 
       const response = await axios.get(
-        `http://localhost:8080/api/v1/users/${uid}`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${uid}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -178,7 +178,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       const accessToken = localStorage.getItem("access_token");
       console.log("Fetching posts for user ID:", userId);
       
-      const endpoint = `http://localhost:8080/api/v1/posts?creatorId=${userId}&page=${page-1}&size=10`;
+      const endpoint = `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?creatorId=${userId}&page=${page-1}&size=10`;
 
       const response = await axios.get(endpoint, {
         headers: {
@@ -222,7 +222,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `http://localhost:8080/api/v1/shares?page=0&size=5`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/shares?page=0&size=5`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -241,7 +241,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
           for (const share of userShareItems) {
             try {
               const postResponse = await axios.get(
-                `http://localhost:8080/api/v1/posts/${share.postId}`,
+                `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${share.postId}`,
                 {
                   headers: {
                     Authorization: `Bearer ${accessToken}`
@@ -289,7 +289,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       if (!accessToken) return;
 
       const response = await axios.get(
-        "http://localhost:8080/api/v1/follows?page=0&size=50",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/follows?page=0&size=50",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -367,7 +367,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       let endpoint;
       
       if (tabValue === 0) {
-        endpoint = `http://localhost:8080/api/v1/posts?creatorId=${userId}&page=${nextPage-1}&size=10`;
+        endpoint = `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts?creatorId=${userId}&page=${nextPage-1}&size=10`;
         
         const response = await axios.get(endpoint, {
           headers: {
@@ -670,7 +670,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
         commentsCount: post.commentCount || post.commentsCount || 0,
         repostsCount: post.shareCount || post.repostsCount || 0,
         mediaUrls: post.media 
-          ? post.media.map(m => m.url.startsWith('http') ? m.url : `http://localhost:8080/${m.url}`) 
+          ? post.media.map(m => m.url.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url}`) 
           : post.mediaUrls || []
       };
     }
@@ -690,7 +690,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
         avatarUrl: userData?.avatarUrl || null
       },
       mediaUrls: post.media 
-        ? post.media.map(m => m.url.startsWith('http') ? m.url : `http://localhost:8080/${m.url}`) 
+        ? post.media.map(m => m.url.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url}`) 
         : post.mediaUrls || []
     };
   };
@@ -711,7 +711,7 @@ const Profile = ({ userData: propUserData, onBack }) => {
       // Use PATCH method with JSON body as shown in the swagger documentation
       const response = await axios({
         method: 'patch',
-        url: 'http://localhost:8080/api/v1/users/bio',
+        url: 'https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/bio',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${accessToken}`

@@ -36,7 +36,7 @@ const UsersList = ({ visible, onClose, onSelectUser }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/users?size=20",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?size=20",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -65,7 +65,7 @@ const UsersList = ({ visible, onClose, onSelectUser }) => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/v1/users?keyword=${searchQuery}&size=20`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?keyword=${searchQuery}&size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,

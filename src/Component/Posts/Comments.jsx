@@ -49,7 +49,7 @@ const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.delete(
-        `http://localhost:8080/api/v1/comments/${commentId}`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments/${commentId}`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -84,7 +84,7 @@ const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.get(
-        `http://localhost:8080/api/v1/comments?keyword=${postId}&size=20`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments?keyword=${postId}&size=20`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -116,7 +116,7 @@ const Comments = ({ postId, inFeed = false, maxComments = 3 }) => {
     try {
       const accessToken = localStorage.getItem("access_token");
       const response = await axios.post(
-        `http://localhost:8080/api/v1/comments`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/comments`,
         {
           postId: postId,
           content: newComment,

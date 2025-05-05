@@ -99,7 +99,7 @@ const Messages = ({ onClose }) => {
     setLoadingUsers(true);
     try {
       const response = await axios.get(
-        "http://localhost:8080/api/v1/users?size=20",
+        "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users?size=20",
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -129,7 +129,7 @@ const Messages = ({ onClose }) => {
       const [sentResponse, receivedResponse] = await Promise.all([
         // Tin nhắn gửi đi (từ người dùng hiện tại đến người nhận)
         axios.get(
-          `http://localhost:8080/api/chat/history?senderId=${currentUserId}&receiverId=${receiverId}`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/history?senderId=${currentUserId}&receiverId=${receiverId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -138,7 +138,7 @@ const Messages = ({ onClose }) => {
         ),
         // Tin nhắn nhận được (từ người nhận gửi đến người dùng hiện tại)
         axios.get(
-          `http://localhost:8080/api/chat/history?senderId=${receiverId}&receiverId=${currentUserId}`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/history?senderId=${receiverId}&receiverId=${currentUserId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -200,7 +200,7 @@ const Messages = ({ onClose }) => {
       // Nếu có lỗi, thử sử dụng API tổng hợp
       try {
         const fallbackResponse = await axios.get(
-          `http://localhost:8080/api/chat/history`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/history`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`,
@@ -257,7 +257,7 @@ const Messages = ({ onClose }) => {
     
     try {
       const response = await axios.post(
-        `http://localhost:8080/api/chat/send?senderId=${currentUserId}&receiverId=${selectedUser.id}&content=${encodeURIComponent(newMessage)}`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/chat/send?senderId=${currentUserId}&receiverId=${selectedUser.id}&content=${encodeURIComponent(newMessage)}`,
         {},
         {
           headers: {

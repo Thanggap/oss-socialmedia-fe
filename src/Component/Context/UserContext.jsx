@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Tạo instance Axios với cấu hình cơ bản
 const api = axios.create({
-  baseURL: "http://localhost:8080/api/v1",
+  baseURL: "https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1",
   headers: {
     "Content-Type": "application/json",
   },

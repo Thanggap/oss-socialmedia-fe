@@ -41,7 +41,7 @@ const Likes = ({ userId }) => {
       }
 
       const response = await axios.get(
-        `http://localhost:8080/api/v1/likes?page=${page}&size=10`,
+        `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/likes?page=${page}&size=10`,
         {
           headers: {
             Authorization: `Bearer ${accessToken}`,
@@ -119,7 +119,7 @@ const Likes = ({ userId }) => {
         
         try {
           const postResponse = await axios.get(
-            `http://localhost:8080/api/v1/posts/${like.postId}`,
+            `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/posts/${like.postId}`,
             {
               headers: {
                 Authorization: `Bearer ${accessToken}`
@@ -144,7 +144,7 @@ const Likes = ({ userId }) => {
             if (postData.userId && !newUsersCache[postData.userId]) {
               try {
                 const userResponse = await axios.get(
-                  `http://localhost:8080/api/v1/users/${postData.userId}`,
+                  `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${postData.userId}`,
                   {
                     headers: {
                       Authorization: `Bearer ${accessToken}`
@@ -223,7 +223,7 @@ const Likes = ({ userId }) => {
       commentsCount: post.commentCount || post.commentsCount || 0,
       repostsCount: post.shareCount || post.repostsCount || 0,
       mediaUrls: post.media 
-        ? post.media.map(m => m.url?.startsWith('http') ? m.url : `http://localhost:8080/${m.url || ''}`)
+        ? post.media.map(m => m.url?.startsWith('http') ? m.url : `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/${m.url || ''}`)
         : post.mediaUrls || []
     };
   };

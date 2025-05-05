@@ -48,7 +48,7 @@ const FollowModal = ({ open, handleClose, userId, initialTab = 'followers' }) =>
       if (tabValue === 0) {
         // Fetch followers
         const followsResponse = await axios.get(
-          `http://localhost:8080/api/v1/follows?page=${pageNumber}&size=20`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/follows?page=${pageNumber}&size=20`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`
@@ -67,7 +67,7 @@ const FollowModal = ({ open, handleClose, userId, initialTab = 'followers' }) =>
           if (followerIds.length > 0) {
             // Fetch details of each follower user
             const userDetailsPromises = followerIds.map(id => 
-              axios.get(`http://localhost:8080/api/v1/users/${id}`, {
+              axios.get(`https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${id}`, {
                 headers: { Authorization: `Bearer ${accessToken}` }
               })
             );
@@ -106,7 +106,7 @@ const FollowModal = ({ open, handleClose, userId, initialTab = 'followers' }) =>
       } else {
         // Fetch following
         const followsResponse = await axios.get(
-          `http://localhost:8080/api/v1/follows?page=${pageNumber}&size=20`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/follows?page=${pageNumber}&size=20`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`
@@ -125,7 +125,7 @@ const FollowModal = ({ open, handleClose, userId, initialTab = 'followers' }) =>
           if (followingIds.length > 0) {
             // Fetch details of each following user
             const userDetailsPromises = followingIds.map(id => 
-              axios.get(`http://localhost:8080/api/v1/users/${id}`, {
+              axios.get(`https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/users/${id}`, {
                 headers: { Authorization: `Bearer ${accessToken}` }
               })
             );
@@ -196,7 +196,7 @@ const FollowModal = ({ open, handleClose, userId, initialTab = 'followers' }) =>
       if (!isCurrentlyFollowing) {
         // Follow the user
         await axios.post(
-          'http://localhost:8080/api/v1/follows',
+          'https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/follows',
           { followeeId: targetUserId },
           {
             headers: {
@@ -208,7 +208,7 @@ const FollowModal = ({ open, handleClose, userId, initialTab = 'followers' }) =>
       } else if (followId) {
         // Unfollow the user
         await axios.delete(
-          `http://localhost:8080/api/v1/follows/${followId}`,
+          `https://oss-socialmedia-hjfpcheyfpb4eva5.canadacentral-01.azurewebsites.net/api/v1/follows/${followId}`,
           {
             headers: {
               Authorization: `Bearer ${accessToken}`
